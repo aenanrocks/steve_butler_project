@@ -1,0 +1,22 @@
+<!-- templates/orders/update_order.html -->
+<h1>Update Order #{{ order.id }}</h1>
+<form method="post">
+    {% csrf_token %}
+    <label for="details">Details:</label>
+    <input type="text" name="details" id="details" value="{{ order.details }}" required><br>
+    <label for="status">Status:</label>
+    <select name="status" id="status">
+        <option value="PENDING" {% if order.status == 'PENDING' %}selected{% endif %}>Pending</option>
+        <option value="IN_PROGRESS" {% if order.status == 'IN_PROGRESS' %}selected{% endif %}>In Progress</option>
+        <option value="COMPLETED" {% if order.status == 'COMPLETED' %}selected{% endif %}>Completed</option>
+    </select><br>
+    <label for="notes">Notes:</label>
+    <textarea name="notes" id="notes">{{ order.notes }}</textarea><br>
+    <label for="delivery_method">Delivery Method:</label>
+    <select name="delivery_method" id="delivery_method">
+        <option value="PICKUP" {% if order.delivery_method == 'PICKUP' %}selected{% endif %}>Pickup</option>
+        <option value="POST" {% if order.delivery_method == 'POST' %}selected{% endif %}>Post</option>
+        <option value="EMAIL" {% if order.delivery_method == 'EMAIL' %}selected{% endif %}>Email</option>
+    </select><br>
+    <button type="submit">Update Order</button>
+</form>
