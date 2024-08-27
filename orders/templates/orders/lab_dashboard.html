@@ -1,16 +1,17 @@
-<!-- orders/templates/orders/order_list.html -->
+<!-- orders/templates/orders/lab_dashboard.html -->
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Order List</title>
+    <title>Lab Dashboard</title>
 </head>
 <body>
-    <h1>Order List for Clinic {{ clinic.name }}</h1>
+    <h1>Lab Dashboard</h1>
     <table>
         <thead>
             <tr>
                 <th>Order ID</th>
+                <th>Clinic</th>
                 <th>Details</th>
                 <th>Status</th>
                 <th>Finish Date</th>
@@ -21,16 +22,17 @@
             {% for order in orders %}
             <tr>
                 <td>{{ order.id }}</td>
+                <td>{{ order.clinic.name }}</td>
                 <td>{{ order.details }}</td>
                 <td>{{ order.status }}</td>
                 <td>{{ order.finish_date }}</td>
                 <td>
                     <a href="{% url 'order_detail' order.id %}">View</a>
+                    <a href="{% url 'order_update' order.id %}">Edit</a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-    <a href="{% url 'order_create' clinic.id %}">Create New Order</a>
 </body>
 </html>

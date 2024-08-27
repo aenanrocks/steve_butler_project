@@ -1,0 +1,20 @@
+<!-- orders/templates/orders/order_detail.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Detail</title>
+</head>
+<body>
+    <h1>Order Detail</h1>
+    <p><strong>Order ID:</strong> {{ order.id }}</p>
+    <p><strong>Details:</strong> {{ order.details }}</p>
+    <p><strong>Notes:</strong> {{ order.notes }}</p>
+    <p><strong>Status:</strong> {{ order.status }}</p>
+    <p><strong>Finish Date:</strong> {{ order.finish_date }}</p>
+    <p><strong>Delivery Method:</strong> {{ order.delivery_method }}</p>
+    
+    <a href="{% url 'order_update' order.id %}">Edit Order</a>
+    <a href="{% url 'order_list' order.clinic.id %}">Back to Orders List</a>
+</body>
+</html>
