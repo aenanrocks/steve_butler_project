@@ -27,3 +27,20 @@ def create_order(request, clinic_id):
         form = OrderForm()
 
     return render(request, 'orders/create_order.html', {'form': form, 'clinic': clinic})
+
+def edit_order(request, clinic_id, order_id):
+    # Fetch the clinic based on its ID from the User model
+    clinic = get_object_or_404(User, id=clinic_id, role='clinic')  # Assuming 'role' field differentiates clinics
+    order = get_object_or_404(Order, id=order_id, user=clinic)  # Fetch the order associated with the clinic
+    
+    if request.method == 'POST':
+        form = OrderForm(request.POST, instance=order)
+        if form.is_valid():
+            form.save()
+            # Redirect back to the order list view after editing
+            return redirect('orders:order_list', clinic_id=clinic.id)
+    else:
+        form = OrderForm(instance=order)
+    
+    # Render the edit order page with the form and order details
+    return render(request, 'orders/edit_order.html', {'form': form, 'order': order, 'clinic': clinic})

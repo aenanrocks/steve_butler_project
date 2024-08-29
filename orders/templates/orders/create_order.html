@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Order</title>
+</head>
+<body>
+    <h1>Create New Order for {{ clinic.name }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }} <!-- Renders the form fields neatly as paragraphs -->
+        <button type="submit">Submit</button>
+    </form>
+    <a href="{% url 'orders:order_list' clinic.id %}">Back to Order List</a>
+</body>
+</html>
